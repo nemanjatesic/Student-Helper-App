@@ -1,3 +1,24 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Drugi Projekat</string>
+    <string name="title_ime">Ime:</string>
+    <string name="title_prezime">Prezime:</string>
+    <string name="title_profil">Profil</string>
+    <string name="user_enter_name">Unesite ime</string>
+    <string name="user_enter_pin">Unesite pin</string>
+    <string name="action_prijava">Prijava</string>
+    <string name="info_login">Informacioni sistem za pracenje rasporeda casova, pisanja beleski i pracenja statistika</string>
+    <string name="izmeni">Izmeni</string>
+    <string name="odjava">Odjava</string>
+    <string name="odustani">Odustani</string>
+    <string name="pretrazi">🔎 Search by title or content</string>
+    <string name="pretrazi_profesor">Profesor/Predmet…</string>
+    <string name="trazi">Trazi</string>
+    <string name="unknown">Unknown</string>
+    <string name="predmet">Predmet:</string>
+    <string name="tip">Tip:</string>
+    <string name="profesor">Profesor:</string>
+    <string name="ucionica">Ucionica:</string>
+    <string name="grupe">Grupe:</string>
+    <string name="dan">Dan:</string>
+    <string name="vreme">Vreme:</string>
 </resources>

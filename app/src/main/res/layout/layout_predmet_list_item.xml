@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/edit_text_border_rounded"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="15dp">
+
+    <TextView
+        android:id="@+id/pTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/predmet"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/predmetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/pTV"
+        app:layout_constraintTop_toTopOf="@+id/pTV" />
+
+    <TextView
+        android:id="@+id/dTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:text="@string/dan"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pTV" />
+
+    <TextView
+        android:id="@+id/danTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/dTV"
+        app:layout_constraintTop_toTopOf="@+id/dTV" />
+
+    <TextView
+        android:id="@+id/tTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/tip"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/pTV"
+        app:layout_constraintTop_toBottomOf="@+id/predmetTV" />
+
+    <TextView
+        android:id="@+id/tipTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/tTV"
+        app:layout_constraintTop_toTopOf="@+id/tTV" />
+
+    <TextView
+        android:id="@+id/proTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/profesor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/pTV"
+        app:layout_constraintTop_toBottomOf="@+id/tTV" />
+
+    <TextView
+        android:id="@+id/profesorTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/proTV"
+        app:layout_constraintTop_toTopOf="@+id/proTV" />
+
+    <TextView
+        android:id="@+id/vTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/vreme"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/dTV"
+        app:layout_constraintTop_toBottomOf="@+id/dTV" />
+
+    <TextView
+        android:id="@+id/vremeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/vTV"
+        app:layout_constraintTop_toTopOf="@+id/vTV" />
+
+    <TextView
+        android:id="@+id/ucTV"
+        android:text="@string/ucionica"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/proTV"
+        app:layout_constraintTop_toBottomOf="@+id/proTV" />
+
+    <TextView
+        android:id="@+id/ucionicaTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/ucTV"
+        app:layout_constraintTop_toTopOf="@+id/ucTV" />
+
+    <TextView
+        android:id="@+id/gTV"
+        android:text="@string/grupe"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/ucTV"
+        app:layout_constraintTop_toBottomOf="@+id/ucTV" />
+
+    <TextView
+        android:id="@+id/grupeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/unknown"
+        app:layout_constraintStart_toEndOf="@+id/gTV"
+        app:layout_constraintTop_toTopOf="@+id/gTV" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
