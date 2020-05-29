@@ -21,4 +21,7 @@
     <string name="grupe">Grupe:</string>
     <string name="dan">Dan:</string>
     <string name="vreme">Vreme:</string>
+    <string name="kreiraj">Kreiraj</string>
+    <string name="beleska_naslov_hint">Unesite ime vase beleske ovde…</string>
+    <string name="beleska_sadrzaj_hint">Unesite sadrzaj vase beleske ovde…</string>
 </resources>

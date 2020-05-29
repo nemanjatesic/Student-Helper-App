@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 
-class LoginActivity : AppCompatActivity(R.layout.activity_login){
+class LoginActivity : AppCompatActivity(R.layout.activity_login) {
     companion object {
         const val LOGGED_IN_KEY = "loggedIn"
         const val USER_NAME = "userName"

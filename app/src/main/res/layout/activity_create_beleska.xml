@@ -7,25 +7,26 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/noteTitleEditTV"
+        android:id="@+id/newNoteTitleTV"
         android:layout_width="0dp"
         android:layout_height="30dp"
+        android:hint="@string/beleska_naslov_hint"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:paddingStart="5dp"
-        android:text="@string/unknown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/noteContentEditTV"
+        android:id="@+id/newContentTitleTV"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:hint="@string/beleska_sadrzaj_hint"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -36,12 +37,11 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
 
-        android:text="@string/unknown"
         app:layout_constraintBottom_toTopOf="@+id/odustaniBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteTitleEditTV" />
+        app:layout_constraintTop_toBottomOf="@+id/newNoteTitleTV" />
 
     <Button
         android:id="@+id/odustaniBtn"
@@ -53,18 +53,18 @@
         android:text="@string/odustani"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/noteContentEditTV" />
+        app:layout_constraintStart_toStartOf="@+id/newContentTitleTV" />
 
     <Button
-        android:id="@+id/izmeniBtn"
+        android:id="@+id/kreirajBtn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:background="@drawable/button"
-        android:text="@string/izmeni"
+        android:text="@string/kreiraj"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/odustaniBtn"
-        app:layout_constraintEnd_toEndOf="@+id/noteContentEditTV" />
+        app:layout_constraintEnd_toEndOf="@+id/newContentTitleTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
