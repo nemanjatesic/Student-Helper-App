@@ -2,42 +2,141 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/edit_text_border_rounded"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="15dp">
 
-    <TextView
-        android:id="@+id/pTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/predmet"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/predmetTV"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/unknown"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/pTV"
-        app:layout_constraintTop_toTopOf="@+id/pTV" />
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/vTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/pTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/predmet"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/predmetTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/unknown"
+            app:layout_constraintStart_toEndOf="@+id/pTV"
+            app:layout_constraintTop_toBottomOf="@+id/pTV" />
+
+        <TextView
+            android:id="@+id/ucTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/ucionica"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/proTV"
+            app:layout_constraintTop_toBottomOf="@+id/proTV" />
+
+        <TextView
+            android:id="@+id/ucionicaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/unknown"
+            app:layout_constraintStart_toEndOf="@+id/ucTV"
+            app:layout_constraintTop_toTopOf="@+id/ucTV" />
+
+        <TextView
+            android:id="@+id/gTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/grupe"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ucTV"
+            app:layout_constraintTop_toBottomOf="@+id/ucTV" />
+
+        <TextView
+            android:id="@+id/grupeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/unknown"
+            app:layout_constraintStart_toEndOf="@+id/gTV"
+            app:layout_constraintTop_toTopOf="@+id/gTV" />
+
+        <TextView
+            android:id="@+id/tTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/tip"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/pTV"
+            app:layout_constraintTop_toBottomOf="@+id/predmetTV" />
+
+        <TextView
+            android:id="@+id/tipTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/unknown"
+            app:layout_constraintStart_toEndOf="@+id/tTV"
+            app:layout_constraintTop_toTopOf="@+id/tTV" />
+
+        <TextView
+            android:id="@+id/proTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/profesor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/pTV"
+            app:layout_constraintTop_toBottomOf="@+id/tTV" />
+
+        <TextView
+            android:id="@+id/profesorTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/unknown"
+            app:layout_constraintStart_toEndOf="@+id/proTV"
+            app:layout_constraintTop_toTopOf="@+id/proTV" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:visibility="invisible"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/gTV"
+            app:layout_constraintTop_toBottomOf="@+id/gTV" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/dTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="96dp"
         android:text="@string/dan"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pTV" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/danTV"
@@ -47,44 +146,6 @@
         android:text="@string/unknown"
         app:layout_constraintStart_toEndOf="@+id/dTV"
         app:layout_constraintTop_toTopOf="@+id/dTV" />
-
-    <TextView
-        android:id="@+id/tTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/tip"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/pTV"
-        app:layout_constraintTop_toBottomOf="@+id/predmetTV" />
-
-    <TextView
-        android:id="@+id/tipTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/unknown"
-        app:layout_constraintStart_toEndOf="@+id/tTV"
-        app:layout_constraintTop_toTopOf="@+id/tTV" />
-
-    <TextView
-        android:id="@+id/proTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/profesor"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/pTV"
-        app:layout_constraintTop_toBottomOf="@+id/tTV" />
-
-    <TextView
-        android:id="@+id/profesorTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/unknown"
-        app:layout_constraintStart_toEndOf="@+id/proTV"
-        app:layout_constraintTop_toTopOf="@+id/proTV" />
 
     <TextView
         android:id="@+id/vTV"
@@ -105,42 +166,6 @@
         app:layout_constraintStart_toEndOf="@+id/vTV"
         app:layout_constraintTop_toTopOf="@+id/vTV" />
 
-    <TextView
-        android:id="@+id/ucTV"
-        android:text="@string/ucionica"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@+id/proTV"
-        app:layout_constraintTop_toBottomOf="@+id/proTV" />
 
-    <TextView
-        android:id="@+id/ucionicaTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/unknown"
-        app:layout_constraintStart_toEndOf="@+id/ucTV"
-        app:layout_constraintTop_toTopOf="@+id/ucTV" />
-
-    <TextView
-        android:id="@+id/gTV"
-        android:text="@string/grupe"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@+id/ucTV"
-        app:layout_constraintTop_toBottomOf="@+id/ucTV" />
-
-    <TextView
-        android:id="@+id/grupeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/unknown"
-        app:layout_constraintStart_toEndOf="@+id/gTV"
-        app:layout_constraintTop_toTopOf="@+id/gTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

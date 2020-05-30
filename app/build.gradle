@@ -73,7 +73,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
 
     // Koin
-    def koinVersion = '2.1.5'
+    def koinVersion = '2.1.0-alpha-8'
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-scope:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
@@ -101,14 +101,6 @@ dependencies {
     // https://stackoverflow.com/questions/54991041/difficulty-using-moshis-kotlin-codegen
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
 
-    // Room
-    def roomVersion = '2.2.5'
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-
-    /* DEBUG */
-
     // Stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
@@ -116,3 +108,4 @@ dependencies {
     implementation 'com.facebook.stetho:stetho-urlconnection:1.5.1'
 
 }
+
