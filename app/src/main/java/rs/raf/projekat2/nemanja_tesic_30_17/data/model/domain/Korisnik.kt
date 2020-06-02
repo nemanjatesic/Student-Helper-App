@@ -6,15 +6,10 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "predavanja")
-data class Predavanje (
+@Entity(tableName = "korisnici")
+data class Korisnik (
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    val predmet: String,
-    val tip: String,
-    val profesor: String,
-    val ucionica: String,
-    val grupe: String,
-    val dan: String,
-    val vreme: String
-): Parcelable
+    val username: String,
+    val pin: String
+) : Parcelable

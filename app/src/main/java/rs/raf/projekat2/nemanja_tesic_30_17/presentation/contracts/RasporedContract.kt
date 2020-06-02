@@ -10,6 +10,6 @@ interface RasporedContract {
         val predavanjaFiltered: LiveData<List<Predavanje>>
 
         fun getPredavanja()
-        fun getFilteredPredavanja(grupa: String, dan: String, profesor: String, predmet: String)
+        fun filterPredavanja(grupa: String, dan: String, profesor: String, predmet: String)
     }
 }

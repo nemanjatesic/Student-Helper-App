@@ -15,7 +15,7 @@ class PredavanjeRepositoryImpl(private val predavanjaDataSource: PredavanjaDataS
                 val lista = mutableListOf<Predavanje>()
                 it.forEach{pred ->
                     val predavanje = Predavanje(
-                        i++,
+                        i.toLong(),
                         pred.predmet,
                         pred.tip,
                         pred.nastavnik,
@@ -24,6 +24,7 @@ class PredavanjeRepositoryImpl(private val predavanjaDataSource: PredavanjaDataS
                         pred.dan,
                         pred.termin
                     )
+                    i++
                     lista.add(predavanje)
                 }
                 lista

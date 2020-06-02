@@ -13,8 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_beleske.*
 import kotlinx.android.synthetic.main.fragment_raspored.listRv
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.CreateBeleskaActivity
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.EditBeleskaActivity
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.recycler.adapter.BeleskaAdapter
@@ -25,7 +27,7 @@ import timber.log.Timber
 
 class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
 
-    private val beleskaViewModel: BeleskaViewModel by activityViewModels()
+    private val beleskaViewModel: BeleskaContract.ViewModel by viewModel<BeleskaViewModel>()
 
     private lateinit var beleskaAdapter: BeleskaAdapter
 
@@ -47,10 +49,12 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
         initObservers()
         initListeners()
         initRecycler()
+        beleskaViewModel.getBeleskeByKorisnikId(1)
     }
 
     private fun initObservers() {
-        beleskaViewModel.getBeleske().observe(viewLifecycleOwner, Observer {
+        beleskaViewModel.beleske.observe(viewLifecycleOwner, Observer {
+            Timber.e("Observed promena beleski $it")
             beleskaAdapter.submitList(it)
         })
     }
@@ -71,7 +75,7 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
                     }
                     // Pritisnuo DA i hoce da obrise
                     DialogInterface.BUTTON_NEGATIVE -> {
-                        Timber.e("Hocu da obrisemmmm")
+                        beleskaViewModel.delete(it)
                     }
                 }
             }

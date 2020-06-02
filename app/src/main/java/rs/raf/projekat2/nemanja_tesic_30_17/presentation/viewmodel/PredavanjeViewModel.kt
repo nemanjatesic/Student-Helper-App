@@ -21,7 +21,6 @@ class PredavanjeViewModel (
     private val subscriptions = CompositeDisposable()
 
     override fun getPredavanja() {
-        Timber.e("ovde sam")
         val subscription = predavanjaRepository
             .getAllPredavanja()
             .subscribeOn(Schedulers.io())
@@ -37,7 +36,7 @@ class PredavanjeViewModel (
         subscriptions.add(subscription)
     }
 
-    override fun getFilteredPredavanja(grupa: String, dan: String, profesor: String, predmet: String) {
+    override fun filterPredavanja(grupa: String, dan: String, profesor: String, predmet: String) {
         val subscription = predavanjaRepository
             .getFilteredPredavanja(grupa, dan, profesor, predmet)
             .subscribeOn(Schedulers.io())
@@ -52,5 +51,7 @@ class PredavanjeViewModel (
             )
         subscriptions.add(subscription)
     }
+
+
 
 }

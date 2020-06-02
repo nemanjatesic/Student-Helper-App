@@ -13,17 +13,20 @@ class EditBeleskaActivity : AppCompatActivity(R.layout.activity_change_beleska) 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val long = -1
         beleska = intent.getParcelableExtra(BeleskeFragment.MESSAGE_BELESKA)?: Beleska(
-            -1,
+            long.toLong(),
             "",
-            ""
+            "",
+            long.toLong()
         )
         init()
         initListeners()
     }
 
     private fun init() {
-        if (beleska.id == -1)
+        val long = -1
+        if (beleska.id == long.toLong())
             finish()
         noteTitleEditTV.setText(beleska.naslov)
         noteContentEditTV.setText(beleska.sadrzaj)

@@ -13,11 +13,13 @@ class SplashActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(packageName, Context.MODE_PRIVATE)
         val loggedIn = sharedPreferences.getBoolean(LoginActivity.LOGGED_IN_KEY, false)
         val intent: Intent
-        intent = if (loggedIn) {
-            Intent(this, MainActivity::class.java)
-        }else {
-            Intent(this, LoginActivity::class.java)
-        }
+//        intent = if (loggedIn) {
+//            Intent(this, MainActivity::class.java)
+//        }else {
+//            Intent(this, LoginActivity::class.java)
+//        }
+//        intent = Intent(this, LoginActivity::class.java)
+        intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
