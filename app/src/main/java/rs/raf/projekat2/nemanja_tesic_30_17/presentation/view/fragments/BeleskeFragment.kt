@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -17,10 +18,12 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.fragment_beleske.*
 import kotlinx.android.synthetic.main.fragment_raspored.listRv
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
+import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.CreateBeleskaActivity
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.EditBeleskaActivity
@@ -37,6 +40,7 @@ import timber.log.Timber
 class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
 
     private val beleskaViewModel: BeleskaContract.ViewModel by viewModel<BeleskaViewModel>()
+    private val sharedPreferences: SharedPreferences by inject()
 
     private lateinit var beleskaAdapter: BeleskaAdapter
     private lateinit var korisnik: Korisnik
@@ -68,11 +72,7 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
     }
 
     private fun initKorisnik() {
-        val moshi: Moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<Korisnik> = moshi.adapter(Korisnik::class.java)
-        val sharedPreferences = activity?.getSharedPreferences(activity?.packageName, Context.MODE_PRIVATE)
-
-        korisnik = adapter.fromJson(sharedPreferences!!.getString(LoginActivity.USER,""))!!
+        korisnik = sharedPreferences.getKorisnik()!!
 
         Timber.e(korisnik.toString())
     }

@@ -32,10 +32,9 @@ class ChartView : View {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    public val chartColumns: MutableLiveData<MutableList<ChartColumn>> = MutableLiveData()
+    val chartColumns: MutableList<ChartColumn> = mutableListOf()
 
     private var rect: Rect = Rect()
-    private var paint: Paint = Paint()
 
     private val whiteStrokePaint: Paint = Paint().also {
         it.isAntiAlias = true
@@ -50,8 +49,6 @@ class ChartView : View {
         it.style = Paint.Style.FILL
     }
 
-    var heightDivider = 1
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         Timber.e("On measure")
@@ -60,41 +57,34 @@ class ChartView : View {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         Timber.e("On layout")
-        val frag: Fragment = FragmentManager.findFragment(this)
-        chartColumns.observe(frag.viewLifecycleOwner, Observer {
-            invalidate()
-        })
+//        val frag: Fragment = FragmentManager.findFragment(this)
+//        chartColumns.observe(frag.viewLifecycleOwner, Observer {
+//            invalidate()
+//        })
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         Timber.e("On draw")
-        Timber.e("MOJA LISTICA ${chartColumns.value.toString()}")
+        Timber.e("MOJA LISTICA $chartColumns")
 
-        if (chartColumns.value == null)
-            return
-        if (chartColumns.value?.size == 0)
+        if (chartColumns.size == 0)
             return
 
         val offsetX = width / 5
-
         var left = 0
         val bottom = height
         var right = offsetX
         var top = 0
-
-        var maxHeight = 0
         var maxCount = 0
 
-        chartColumns.value?.forEach {
-            if (it.count > maxCount) {
-                maxCount = it.count
-            }
-        }
+        maxCount = chartColumns.maxBy { it.count }?.count!!
+        if (maxCount == 0) return
 
-        chartColumns.value?.forEach {
+        chartColumns.forEach {
             top = height - ((height / maxCount) * it.count)
             rect.set(left, top, right, bottom)
+
             canvas?.drawRect(rect, blueFillPaint)
             canvas?.drawRect(rect, whiteStrokePaint)
 

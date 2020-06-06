@@ -32,6 +32,8 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        et_user_name.setText("nemanja")
+        et_pin.setText("1234")
         initObservers()
         initListeners()
     }

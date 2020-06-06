@@ -1,14 +1,17 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_statistika.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartColumn
+import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.BeleskaViewModel
@@ -19,6 +22,7 @@ import kotlin.collections.HashMap
 
 class StatistikaFragment : Fragment(R.layout.fragment_statistika) {
     private val beleskaViewModel: BeleskaContract.ViewModel by viewModel<BeleskaViewModel>()
+    private val sharedPreferences: SharedPreferences by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,9 +35,9 @@ class StatistikaFragment : Fragment(R.layout.fragment_statistika) {
 
     private fun initObservers() {
         beleskaViewModel.beleskeState.observe(viewLifecycleOwner, Observer {
+            Timber.e("USAO OVDE")
             when(it) {
                 is BeleskeState.Success -> {
-                    chartView.chartColumns.value?.clear()
                     val sdf = SimpleDateFormat("yyyy-MM-dd")
                     val dateList: MutableList<String> = mutableListOf()
                     val cal = Calendar.getInstance()
@@ -70,20 +74,28 @@ class StatistikaFragment : Fragment(R.layout.fragment_statistika) {
 
                     Timber.e("Ovo je listaaa kolonaa $listOfColumns")
 
-                    textView3.setText(listOfColumns[0].dateCreated)
-                    textView5.setText(listOfColumns[1].dateCreated)
-                    textView6.setText(listOfColumns[2].dateCreated)
-                    textView7.setText(listOfColumns[3].dateCreated)
-                    textView4.setText(listOfColumns[4].dateCreated)
+                    prviDole.setText(listOfColumns[0].dateCreated)
+                    drugiDole.setText(listOfColumns[1].dateCreated)
+                    treciDole.setText(listOfColumns[2].dateCreated)
+                    cetvrtiDole.setText(listOfColumns[3].dateCreated)
+                    petiDole.setText(listOfColumns[4].dateCreated)
 
-                    chartView.chartColumns.value = listOfColumns
+                    prviGore.setText(listOfColumns[0].count.toString())
+                    drugiGore.setText(listOfColumns[1].count.toString())
+                    treciGore.setText(listOfColumns[2].count.toString())
+                    cetvrtiGore.setText(listOfColumns[3].count.toString())
+                    petiGore.setText(listOfColumns[4].count.toString())
 
+                    chartView.chartColumns.clear()
+                    chartView.chartColumns.addAll(listOfColumns)
+                    chartView.invalidate()
                 }
                 is BeleskeState.Error -> Toast.makeText(context, "Error happened", Toast.LENGTH_SHORT).show()
             }
         })
 
-        beleskaViewModel.filter("",1, 1)
+        val korisnik = sharedPreferences.getKorisnik()
+        beleskaViewModel.filter("",1, korisnik!!.id)
     }
 
 
