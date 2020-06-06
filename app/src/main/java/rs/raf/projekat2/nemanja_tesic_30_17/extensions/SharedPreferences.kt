@@ -10,6 +10,6 @@ fun SharedPreferences.getKorisnik() : Korisnik? {
     val moshi: Moshi = Moshi.Builder().build()
     val adapter: JsonAdapter<Korisnik> = moshi.adapter(Korisnik::class.java)
     val user = this.getString(LoginActivity.USER,"")
-    if (user == "") return null
-    return adapter.fromJson(user!!)
+    if (user == "" || user == null) return null
+    return adapter.fromJson(user)
 }

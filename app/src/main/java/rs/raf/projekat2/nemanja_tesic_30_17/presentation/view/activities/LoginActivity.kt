@@ -2,6 +2,7 @@ package rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.widget.EditText
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
@@ -24,6 +26,7 @@ import timber.log.Timber
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
     private val korisnikViewModel:KorisnikContract.ViewModel by viewModel<KorisnikViewModel>()
+    private val sharedPreferences: SharedPreferences by inject()
 
     companion object {
         const val LOGGED_IN_KEY = "loggedIn"
@@ -44,7 +47,6 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
                 Toast.makeText(applicationContext,"Pogresno ste ukucali username ili pin",Toast.LENGTH_SHORT).show()
                 //korisnikViewModel.insert(Korisnik(0,et_user_name.text.toString(), et_pin.text.toString()))
             }else {
-                val sharedPreferences = getSharedPreferences(packageName, Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putBoolean(LOGGED_IN_KEY, true)
                 val moshi: Moshi = Moshi.Builder().build()

@@ -14,7 +14,6 @@ import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
     version = 2,
     exportSchema = false)
 abstract class ProjectDatabase : RoomDatabase() {
-
     abstract fun getBeleskaDao(): BeleskaDao
     abstract fun getKorisnikDao(): KorisnikDao
     abstract fun getPredavanjeDao(): PredavanjeDao

@@ -69,7 +69,6 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Timber.e(options[position])
                 selectedDan = options[position]
             }
         }
@@ -94,7 +93,6 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Timber.e(options1[position])
                 selectedGrupa = options1[position]
             }
 
@@ -103,7 +101,6 @@ class RasporedFragment : Fragment(R.layout.fragment_raspored) {
 
     private fun initObservers() {
         predavanjeViewModel.predavanjaState.observe(viewLifecycleOwner, Observer {
-            Timber.e(it.toString())
             renderState(it)
         })
         predavanjeViewModel.getPredavanja()
