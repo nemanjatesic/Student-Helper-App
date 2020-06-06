@@ -1,13 +1,11 @@
-package rs.raf.projekat2.nemanja_tesic_30_17.data.datasources
+package rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.KorisnikWithBeleske
 
 @Dao
 abstract class KorisnikDao {
@@ -23,9 +21,5 @@ abstract class KorisnikDao {
 
     @Query("SELECT * FROM korisnici WHERE username == :username AND pin == :pin")
     abstract fun verify(username: String, pin: String): Maybe<Korisnik>
-
-    @Transaction
-    @Query("SELECT * FROM korisnici WHERE id == :id")
-    abstract fun getKorisnikWithBeleskeByKorisnikId(id: Long): Maybe<KorisnikWithBeleske>
 
 }

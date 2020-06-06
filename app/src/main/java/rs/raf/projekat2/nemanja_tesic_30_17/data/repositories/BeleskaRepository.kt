@@ -10,7 +10,9 @@ interface BeleskaRepository {
 
     fun getAllByKorisnikId(id: Long) : Observable<List<Beleska>>
 
-    fun update(beleska: Beleska): Completable
+    fun update(beleskaNaslov: String, beleskaSadrzaj: String, arhivirana: Int, id: Long): Completable
 
-    fun delete(beleska: Beleska): Completable
+    fun delete(idBeleske: Long): Completable
+
+    fun filter(beleskaNaslov: String, arhivirana: Int, id: Long): Observable<List<Beleska>>
 }

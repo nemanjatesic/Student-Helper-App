@@ -1,37 +1,59 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.data.repositories
 
 import io.reactivex.Observable
-import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.PredavanjaDataSource
+import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.PredavanjeDao
+import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.remote.PredavanjaService
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
+import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Resource
 import timber.log.Timber
+import javax.sql.CommonDataSource
 
-class PredavanjeRepositoryImpl(private val predavanjaDataSource: PredavanjaDataSource) : PredavanjeRepository {
+class PredavanjeRepositoryImpl(
+    private val localDataSource: PredavanjeDao,
+    private val remoteDataSource: PredavanjaService
+) : PredavanjeRepository {
 
     override fun getAllPredavanja(): Observable<List<Predavanje>> {
-        var i = 0
-        return predavanjaDataSource
-            .getAll()
-            .map {
-                val lista = mutableListOf<Predavanje>()
-                it.forEach{pred ->
-                    val predavanje = Predavanje(
-                        i.toLong(),
-                        pred.predmet,
-                        pred.tip,
-                        pred.nastavnik,
-                        pred.ucionica,
-                        pred.grupe,
-                        pred.dan,
-                        pred.termin
-                    )
-                    i++
-                    lista.add(predavanje)
-                }
-                lista
-            }
-        }
+        return localDataSource.getAll()
+    }
 
     override fun getFilteredPredavanja(grupa: String, dan: String, profesor: String, predmet: String): Observable<List<Predavanje>> {
-        TODO("Not yet implemented")
+        return localDataSource.filterAll(grupa, dan, profesor, predmet)
+    }
+
+    override fun fetchAllPredavanja(): Observable<Resource<Unit>> {
+        var i = 0
+        return remoteDataSource
+            .getAll()
+            .doOnNext {
+                val lista = it.map {predavanjeResponse ->
+                    val dan = when(predavanjeResponse.dan) {
+                        "PON" -> "Ponedeljak"
+                        "UTO" -> "Utorak"
+                        "SRE" -> "Sreda"
+                        "ČET" -> "Cetvrtak"
+                        "PET" -> "Petak"
+                        "SUB" -> "Subota"
+                        "NED" -> "Nedelja"
+                        else -> "Svi"
+                    }
+                    val predavanje = Predavanje(
+                        i.toLong(),
+                        predavanjeResponse.predmet,
+                        predavanjeResponse.tip,
+                        predavanjeResponse.nastavnik,
+                        predavanjeResponse.ucionica,
+                        predavanjeResponse.grupe,
+                        dan,
+                        predavanjeResponse.termin
+                    )
+                    i++
+                    predavanje
+                }
+                localDataSource.deleteAndInsertAll(lista)
+            }
+            .map {
+                Resource.Success(Unit)
+            }
     }
 }

@@ -35,20 +35,27 @@ class KorisnikViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getKorisnikByUsername(username: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getKorisnikById(id: Long) {
-        TODO("Not yet implemented")
-    }
-
     override fun verify(username: String, pin: String) {
-        TODO("Not yet implemented")
+        val subscription = korisnikRepository
+            .verify(username, pin)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess {
+                ulogovani.value = it
+            }
+            .doOnError {
+                Timber.e("doOnError")
+            }
+            .doOnComplete {
+                ulogovani.value = null
+            }
+            .subscribe()
+        subscriptions.add(subscription)
     }
 
-    override fun getKorisnikWithBeleskeByKorisnikId(id: Long) {
-        TODO("Not yet implemented")
+    override fun onCleared() {
+        super.onCleared()
+        subscriptions.dispose()
     }
 
 }

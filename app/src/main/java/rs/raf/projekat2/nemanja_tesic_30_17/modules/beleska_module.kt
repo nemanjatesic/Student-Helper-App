@@ -9,7 +9,7 @@ import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.BeleskaViewMo
 
 val beleskaModule = module {
 
-    single { BeleskaViewModel(get()) }
+    viewModel { BeleskaViewModel(get()) }
 
     single<BeleskaRepository> { BeleskaRepositoryImpl(get()) }
 

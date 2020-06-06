@@ -14,7 +14,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:dividerHeight="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/traziButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,13 +52,13 @@
         android:paddingStart="5dp"
         android:hint="@string/pretrazi_profesor"
         android:background="@drawable/edit_text_border"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="@+id/traziButton"
+        app:layout_constraintEnd_toStartOf="@+id/traziButton"
         app:layout_constraintStart_toStartOf="@+id/listRv"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="@+id/traziButton" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/traziButton"
         android:text="@string/trazi"
         android:background="@drawable/button"
         android:textColor="@color/white"
@@ -74,6 +74,15 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
