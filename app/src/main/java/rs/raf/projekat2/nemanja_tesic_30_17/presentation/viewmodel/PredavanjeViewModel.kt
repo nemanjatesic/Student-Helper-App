@@ -86,11 +86,11 @@ class PredavanjeViewModel (
                     when(it) {
                         is Resource.Loading -> predavanjaState.value = PredavanjaState.Loading
                         is Resource.Success -> predavanjaState.value = PredavanjaState.DataFetched
-                        is Resource.Error -> predavanjaState.value = PredavanjaState.Error("Error happened while fetching data from the server")
+                        is Resource.Error -> predavanjaState.value = PredavanjaState.Error("Error happened while fetching data from the server, you are looking at cached data")
                     }
                 },
                 {
-                    predavanjaState.value = PredavanjaState.Error("Error happened while fetching data from the server")
+                    predavanjaState.value = PredavanjaState.Error("Error happened while fetching data from the server, you are looking at cached data")
                     Timber.e(it)
                 }
             )
