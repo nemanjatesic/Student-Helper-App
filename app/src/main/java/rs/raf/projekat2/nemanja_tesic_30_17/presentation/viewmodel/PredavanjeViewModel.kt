@@ -29,7 +29,6 @@ class PredavanjeViewModel (
 
     init {
         val subscription = publishSubject
-            .debounce(200, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .switchMap {
                 val filter = it.split("|||")
