@@ -7,10 +7,8 @@ import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "korisnici")
 @JsonClass(generateAdapter = true)
 data class Korisnik (
-    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val username: String,
     val pin: String

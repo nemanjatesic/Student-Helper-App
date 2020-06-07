@@ -16,6 +16,7 @@ class KorisnikViewModel(
 ): ViewModel(), KorisnikContract.ViewModel {
 
     override val ulogovani: MutableLiveData<Korisnik> = MutableLiveData()
+    override val ulogovaniId: MutableLiveData<Long> = MutableLiveData()
 
     private val subscriptions = CompositeDisposable()
 
@@ -50,6 +51,40 @@ class KorisnikViewModel(
                 ulogovani.value = null
             }
             .subscribe()
+        subscriptions.add(subscription)
+    }
+
+    override fun getUlogovaniId() {
+        val subscription = korisnikRepository
+            .getUlogovaniId()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess {
+                ulogovaniId.value = it
+            }
+            .doOnError {
+                Timber.e("doOnError")
+            }
+            .doOnComplete {
+                ulogovaniId.value = (-1).toLong()
+            }
+            .subscribe()
+        subscriptions.add(subscription)
+    }
+
+    override fun setUlogovani(korisnik: Korisnik) {
+        val subscription = korisnikRepository
+            .setUlogovani(korisnik)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("Koirsnik uspesno dodat")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
         subscriptions.add(subscription)
     }
 

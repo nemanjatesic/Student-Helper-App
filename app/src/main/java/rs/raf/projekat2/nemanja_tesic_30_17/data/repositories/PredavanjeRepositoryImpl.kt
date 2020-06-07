@@ -3,6 +3,7 @@ package rs.raf.projekat2.nemanja_tesic_30_17.data.repositories
 import io.reactivex.Observable
 import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.PredavanjeDao
 import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.remote.PredavanjaService
+import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.PredavanjeEntity
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Resource
 import timber.log.Timber
@@ -14,11 +15,23 @@ class PredavanjeRepositoryImpl(
 ) : PredavanjeRepository {
 
     override fun getAllPredavanja(): Observable<List<Predavanje>> {
-        return localDataSource.getAll()
+        return localDataSource
+            .getAll()
+            .map {
+                it.map {
+                    Predavanje(it.id,it.predmet,it.tip,it.profesor,it.ucionica,it.grupe,it.dan,it.vreme)
+                }
+            }
     }
 
     override fun getFilteredPredavanja(grupa: String, dan: String, profesor: String, predmet: String): Observable<List<Predavanje>> {
-        return localDataSource.filterAll(grupa, dan, profesor, predmet)
+        return localDataSource
+            .filterAll(grupa, dan, profesor, predmet)
+            .map {
+                it.map {
+                    Predavanje(it.id,it.predmet,it.tip,it.profesor,it.ucionica,it.grupe,it.dan,it.vreme)
+                }
+            }
     }
 
     override fun fetchAllPredavanja(): Observable<Resource<Unit>> {
@@ -37,7 +50,7 @@ class PredavanjeRepositoryImpl(
                         "NED" -> "Nedelja"
                         else -> "Svi"
                     }
-                    val predavanje = Predavanje(
+                    val predavanje = PredavanjeEntity(
                         i.toLong(),
                         predavanjeResponse.predmet,
                         predavanjeResponse.tip,

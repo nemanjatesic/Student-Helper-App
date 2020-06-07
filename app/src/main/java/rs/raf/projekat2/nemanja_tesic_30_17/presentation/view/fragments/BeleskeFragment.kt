@@ -14,8 +14,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.fragment_beleske.*
 import kotlinx.android.synthetic.main.fragment_raspored.listRv
 import org.koin.android.ext.android.inject
@@ -25,25 +23,24 @@ import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.KorisnikContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.CreateBeleskaActivity
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.EditBeleskaActivity
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.LoginActivity
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.recycler.adapter.BeleskaAdapter
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.recycler.diff.BeleskaDiffItemCallback
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.DeleteBeleskaState
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.EditBeleskaState
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.BeleskaViewModel
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.KorisnikViewModel
 import timber.log.Timber
 
 
 class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
 
     private val beleskaViewModel: BeleskaContract.ViewModel by viewModel<BeleskaViewModel>()
-    private val sharedPreferences: SharedPreferences by inject()
+    private val korisnikViewModel: KorisnikContract.ViewModel by viewModel<KorisnikViewModel>()
 
+    private var korisnikId: Long = -1
     private lateinit var beleskaAdapter: BeleskaAdapter
-    private lateinit var korisnik: Korisnik
     private var switchSelected = false
 
     companion object {
@@ -64,52 +61,22 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
     }
 
     private fun initUi() {
-        initKorisnik()
         initObservers()
         initListeners()
         initRecycler()
-        initViewModel()
     }
 
-    private fun initKorisnik() {
-        korisnik = sharedPreferences.getKorisnik()!!
-
-        Timber.e(korisnik.toString())
-    }
-
-    private fun initViewModel() {
-        beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnik.id)
-    }
 
     private fun initObservers() {
         beleskaViewModel.beleskeState.observe(viewLifecycleOwner, Observer {
             Timber.e("Beleske updated")
             renderState(it)
         })
-
-        beleskaViewModel.deleteDone.observe(viewLifecycleOwner, Observer {
-            Timber.e("Beleska deleted")
-            renderDeleteState(it)
+        korisnikViewModel.ulogovaniId.observe(viewLifecycleOwner, Observer {
+            korisnikId = it
+            beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnikId)
         })
-
-        beleskaViewModel.editDone.observe(viewLifecycleOwner, Observer {
-            Timber.e("Beleska edited")
-            renderEditState(it)
-        })
-    }
-
-    private fun renderEditState(state: EditBeleskaState) {
-        when(state) {
-            is EditBeleskaState.Success -> Toast.makeText(context, "Beleska updated", Toast.LENGTH_SHORT).show()
-            is EditBeleskaState.Error -> Toast.makeText(context, "Error happened", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun renderDeleteState(state: DeleteBeleskaState) {
-        when(state) {
-            is DeleteBeleskaState.Success -> Toast.makeText(context, "Beleska deleted", Toast.LENGTH_SHORT).show()
-            is DeleteBeleskaState.Error -> Toast.makeText(context, "Error happened", Toast.LENGTH_SHORT).show()
-        }
+        korisnikViewModel.getUlogovaniId()
     }
 
     private fun renderState(state: BeleskeState) {
@@ -118,6 +85,9 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
                 beleskaAdapter.submitList(state.beleske)
             }
             is BeleskeState.Error -> Toast.makeText(context, "Error happened", Toast.LENGTH_SHORT).show()
+            is BeleskeState.Edit -> Toast.makeText(context, "Beleska updated", Toast.LENGTH_SHORT).show()
+            is BeleskeState.Delete -> Toast.makeText(context, "Beleska deleted", Toast.LENGTH_SHORT).show()
+            is BeleskeState.Add -> Toast.makeText(context, "Beleska added", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -127,11 +97,11 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
             startActivity(intent)
         }
         et_search.doAfterTextChanged {
-            beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnik.id)
+            beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnikId)
         }
         switch1.setOnCheckedChangeListener { buttonView, isChecked ->
             switchSelected = isChecked
-            beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnik.id)
+            beleskaViewModel.filter(et_search.text.toString(), if (switchSelected) 1 else 0, korisnikId)
             Timber.e("Is checked %s", switchSelected.toString())
         }
     }
@@ -171,7 +141,7 @@ class BeleskeFragment : Fragment(R.layout.fragment_beleske) {
         intent.putExtra(MESSAGE_BELESKA, it)
         intent.putExtra(BELESKA_NASLOV, et_search.text.toString())
         intent.putExtra(BELESKA_ARHIVIRANA, if (switchSelected) 1 else 0)
-        intent.putExtra(BELESKA_ID, korisnik.id)
+        intent.putExtra(BELESKA_ID, korisnikId)
 
         startActivity(intent)
     }

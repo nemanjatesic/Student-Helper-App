@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartData
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.repositories.BeleskaRepository
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
@@ -17,12 +18,7 @@ class BeleskaViewModel(
     private val beleskaRepository: BeleskaRepository
 ) : ViewModel(), BeleskaContract.ViewModel {
 
-    override val beleske : MutableLiveData<List<Beleska>> = MutableLiveData()
-
     override val beleskeState: MutableLiveData<BeleskeState> = MutableLiveData()
-    override val addDone: MutableLiveData<AddBeleskaState> = MutableLiveData()
-    override val deleteDone: MutableLiveData<DeleteBeleskaState> = MutableLiveData()
-    override val editDone: MutableLiveData<EditBeleskaState> = MutableLiveData()
 
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
 
@@ -62,10 +58,10 @@ class BeleskaViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    addDone.value = AddBeleskaState.Success
+                    beleskeState.value = BeleskeState.Add("Added")
                 },
                 {
-                    addDone.value = AddBeleskaState.Error("Error happened while adding beleska")
+                    beleskeState.value = BeleskeState.Error("Error happened while adding beleska")
                     Timber.e(it)
                 }
             )
@@ -79,10 +75,10 @@ class BeleskaViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    editDone.value = EditBeleskaState.Success
+                    beleskeState.value = BeleskeState.Edit("Edited")
                 },
                 {
-                    editDone.value = EditBeleskaState.Error("Error happened while updating beleska")
+                    beleskeState.value = BeleskeState.Error("Error happened while updating beleska")
                     Timber.e(it)
                 }
             )
@@ -96,10 +92,27 @@ class BeleskaViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    deleteDone.value = DeleteBeleskaState.Success
+                    beleskeState.value = BeleskeState.Delete("Deleted")
                 },
                 {
-                    deleteDone.value = DeleteBeleskaState.Error("Error happened while deleting beleska")
+                    beleskeState.value = BeleskeState.Error("Error happened while deleting beleska")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun getChartData(id: Long) {
+        val subscription = beleskaRepository
+            .getCharData(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    beleskeState.value = BeleskeState.LoadedChartData(it)
+                },
+                {
+                    beleskeState.value = BeleskeState.Error("Error happened while getting chart data")
                     Timber.e(it)
                 }
             )

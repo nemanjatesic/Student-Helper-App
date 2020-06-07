@@ -6,11 +6,11 @@ import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.BeleskaDao
 import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.KorisnikDao
 import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.PredavanjeDao
 import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.BeleskaEntity
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
+import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.KorisnikEntity
+import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.PredavanjeEntity
 
 @Database(
-    entities = [BeleskaEntity::class, Predavanje::class, Korisnik::class],
+    entities = [BeleskaEntity::class, PredavanjeEntity::class, KorisnikEntity::class],
     version = 2,
     exportSchema = false)
 abstract class ProjectDatabase : RoomDatabase() {

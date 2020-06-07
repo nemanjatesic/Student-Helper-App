@@ -26,7 +26,6 @@ import timber.log.Timber
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
     private val korisnikViewModel:KorisnikContract.ViewModel by viewModel<KorisnikViewModel>()
-    private val sharedPreferences: SharedPreferences by inject()
 
     companion object {
         const val LOGGED_IN_KEY = "loggedIn"
@@ -47,13 +46,7 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
                 Toast.makeText(applicationContext,"Pogresno ste ukucali username ili pin",Toast.LENGTH_SHORT).show()
                 //korisnikViewModel.insert(Korisnik(0,et_user_name.text.toString(), et_pin.text.toString()))
             }else {
-                val editor = sharedPreferences.edit()
-                editor.putBoolean(LOGGED_IN_KEY, true)
-                val moshi: Moshi = Moshi.Builder().build()
-                val adapter: JsonAdapter<Korisnik> = moshi.adapter(Korisnik::class.java)
-                editor.putString(USER, adapter.toJson(it).toString())
-                Timber.e(adapter.toJson(it).toString())
-                editor.apply()
+                korisnikViewModel.setUlogovani(it)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

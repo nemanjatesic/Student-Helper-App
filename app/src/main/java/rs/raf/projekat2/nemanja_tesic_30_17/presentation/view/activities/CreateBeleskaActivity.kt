@@ -16,16 +16,19 @@ import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.KorisnikContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.fragments.BeleskeFragment
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.AddBeleskaState
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.EditBeleskaState
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.BeleskaViewModel
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.KorisnikViewModel
 
 
 class CreateBeleskaActivity : AppCompatActivity(R.layout.activity_create_beleska) {
 
     private val beleskaViewModel: BeleskaContract.ViewModel by viewModel<BeleskaViewModel>()
-    private val sharedPreferences: SharedPreferences by inject()
+    private val korisnikViewModel: KorisnikContract.ViewModel by viewModel<KorisnikViewModel>()
+
+    private var korisnikId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,27 +41,31 @@ class CreateBeleskaActivity : AppCompatActivity(R.layout.activity_create_beleska
             finish()
         }
         kreirajBtn.setOnClickListener {
+            if (korisnikId == (-1).toLong())
+                return@setOnClickListener
             val newBeleskaNaslov = newNoteTitleTV.text.toString()
             val newBeleskaSadrzaj = newContentTitleeTV.text.toString()
 
-            val korisnik = sharedPreferences.getKorisnik()
-
-            val beleska = Beleska(0, newBeleskaNaslov, newBeleskaSadrzaj,0,"", korisnik!!.id)
+            val beleska = Beleska(0, newBeleskaNaslov, newBeleskaSadrzaj,0,"", korisnikId)
             beleskaViewModel.insert(beleska)
             finish()
         }
     }
 
     private fun initObservers() {
-        beleskaViewModel.addDone.observe(this, Observer {
+        beleskaViewModel.beleskeState.observe(this, Observer {
             renderState(it)
         })
+        korisnikViewModel.ulogovaniId.observe(this, Observer {
+            korisnikId = it
+        })
+        korisnikViewModel.getUlogovaniId()
     }
 
-    private fun renderState(state: AddBeleskaState) {
+    private fun renderState(state: BeleskeState) {
         when(state) {
-            is AddBeleskaState.Success -> Toast.makeText(this, "Beleska added", Toast.LENGTH_SHORT).show()
-            is AddBeleskaState.Error -> Toast.makeText(this, "Error happened", Toast.LENGTH_SHORT).show()
+            is BeleskeState.Add -> Toast.makeText(this, "Beleska added", Toast.LENGTH_SHORT).show()
+            is BeleskeState.Error -> Toast.makeText(this, "Error happened", Toast.LENGTH_SHORT).show()
         }
     }
 }

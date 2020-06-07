@@ -7,20 +7,9 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.findFragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_statistika.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartColumn
+import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartData
 import rs.raf.projekat2.nemanja_tesic_30_17.extensions.toPx
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.BeleskaViewModel
 import timber.log.Timber
 
 class ChartView : View {
@@ -32,7 +21,7 @@ class ChartView : View {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    val chartColumns: MutableList<ChartColumn> = mutableListOf()
+    val chartData: MutableList<ChartData> = mutableListOf()
 
     private var rect: Rect = Rect()
 
@@ -66,9 +55,9 @@ class ChartView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         Timber.e("On draw")
-        Timber.e("MOJA LISTICA $chartColumns")
+        Timber.e("MOJA LISTICA $chartData")
 
-        if (chartColumns.size == 0)
+        if (chartData.size == 0)
             return
 
         val offsetX = width / 5
@@ -78,10 +67,10 @@ class ChartView : View {
         var top = 0
         var maxCount = 0
 
-        maxCount = chartColumns.maxBy { it.count }?.count!!
+        maxCount = chartData.maxBy { it.count }?.count!!
         if (maxCount == 0) return
 
-        chartColumns.forEach {
+        chartData.forEach {
             top = height - ((height / maxCount) * it.count)
             rect.set(left, top, right, bottom)
 

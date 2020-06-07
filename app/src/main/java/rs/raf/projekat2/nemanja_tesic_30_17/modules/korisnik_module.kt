@@ -11,7 +11,7 @@ val korisnikModule = module {
 
     viewModel { KorisnikViewModel(get()) }
 
-    single<KorisnikRepository> { KorisnikRepositoryImpl(get()) }
+    single<KorisnikRepository> { KorisnikRepositoryImpl(korisnikDao = get(), sharedPreferences = get()) }
 
     single { get<ProjectDatabase>().getKorisnikDao() }
 }

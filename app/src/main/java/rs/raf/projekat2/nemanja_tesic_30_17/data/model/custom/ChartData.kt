@@ -1,10 +1,10 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom
 
-data class ChartColumn(
+data class ChartData(
     val dateCreated: String,
     var count: Int
-): Comparable<ChartColumn> {
-    override fun compareTo(other: ChartColumn): Int {
+): Comparable<ChartData> {
+    override fun compareTo(other: ChartData): Int {
         return dateCreated.compareTo(other.dateCreated)
     }
 
@@ -12,16 +12,12 @@ data class ChartColumn(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as ChartColumn
-
+        other as ChartData
         if (dateCreated != other.dateCreated) return false
-
         return true
     }
 
     override fun hashCode(): Int {
         return dateCreated.hashCode()
     }
-
-
 }

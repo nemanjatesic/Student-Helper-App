@@ -1,12 +1,11 @@
-package rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain
+package rs.raf.projekat2.nemanja_tesic_30_17.data.entities
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-data class Predavanje (
+@Entity(tableName = "predavanja")
+data class PredavanjeEntity (
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val predmet: String,
     val tip: String,
@@ -15,4 +14,4 @@ data class Predavanje (
     val grupe: String,
     val dan: String,
     val vreme: String
-): Parcelable
+)

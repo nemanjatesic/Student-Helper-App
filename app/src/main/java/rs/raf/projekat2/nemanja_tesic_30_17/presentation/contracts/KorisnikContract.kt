@@ -7,8 +7,11 @@ interface KorisnikContract {
 
     interface ViewModel {
         val ulogovani: LiveData<Korisnik>
+        val ulogovaniId: LiveData<Long>
 
         fun insert(korisnik: Korisnik)
         fun verify(username: String, pin: String)
+        fun getUlogovaniId()
+        fun setUlogovani(korisnik: Korisnik)
     }
 }

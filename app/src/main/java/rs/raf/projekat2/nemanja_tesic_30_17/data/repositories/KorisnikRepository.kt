@@ -14,4 +14,8 @@ interface KorisnikRepository {
 
     fun verify(username: String, pin: String): Maybe<Korisnik>
 
+    fun getUlogovaniId(): Maybe<Long>
+
+    fun setUlogovani(korisnik: Korisnik): Completable
+
 }
