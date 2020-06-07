@@ -1,6 +1,5 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.data.repositories
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

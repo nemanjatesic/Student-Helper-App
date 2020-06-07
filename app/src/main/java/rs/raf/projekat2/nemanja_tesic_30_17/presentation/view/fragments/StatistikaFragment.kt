@@ -1,15 +1,12 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_statistika.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
-import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.KorisnikContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState

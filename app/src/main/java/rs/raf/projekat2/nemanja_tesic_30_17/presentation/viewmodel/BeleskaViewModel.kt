@@ -6,11 +6,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartData
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.repositories.BeleskaRepository
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.*
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

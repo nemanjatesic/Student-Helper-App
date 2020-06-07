@@ -4,20 +4,23 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_raspored.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
+import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.RasporedContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.recycler.adapter.PredavanjeAdapter
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.recycler.diff.PredavanjeDiffItemCallback
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.PredavanjeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.predavanje.PredavanjaState
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel.PredavanjeViewModel
 import timber.log.Timber
 
 class RasporedFragment : Fragment(R.layout.fragment_raspored) {

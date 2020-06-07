@@ -3,10 +3,6 @@ package rs.raf.projekat2.nemanja_tesic_30_17.application
 import android.app.Application
 import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-
-import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory

@@ -1,10 +1,8 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.fragments
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -16,12 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_beleske.*
 import kotlinx.android.synthetic.main.fragment_raspored.listRv
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.nemanja_tesic_30_17.R
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
-import rs.raf.projekat2.nemanja_tesic_30_17.extensions.getKorisnik
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.BeleskaContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts.KorisnikContract
 import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.activities.CreateBeleskaActivity

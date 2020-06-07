@@ -1,6 +1,5 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

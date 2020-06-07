@@ -2,7 +2,6 @@ package rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local
 
 import androidx.room.*
 import io.reactivex.Completable
-import io.reactivex.Maybe
 import io.reactivex.Observable
 import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.PredavanjeEntity
 

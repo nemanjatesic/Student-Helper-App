@@ -6,7 +6,6 @@ import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.KorisnikEntity
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Korisnik
 
 @Dao
 abstract class KorisnikDao {

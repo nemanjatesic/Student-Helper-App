@@ -3,9 +3,9 @@ package rs.raf.projekat2.nemanja_tesic_30_17.data.repositories
 import io.reactivex.Completable
 import io.reactivex.Observable
 import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.local.BeleskaDao
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.BeleskaEntity
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartData
+import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*

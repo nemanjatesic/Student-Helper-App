@@ -6,8 +6,6 @@ import rs.raf.projekat2.nemanja_tesic_30_17.data.datasources.remote.PredavanjaSe
 import rs.raf.projekat2.nemanja_tesic_30_17.data.entities.PredavanjeEntity
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Predavanje
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Resource
-import timber.log.Timber
-import javax.sql.CommonDataSource
 
 class PredavanjeRepositoryImpl(
     private val localDataSource: PredavanjeDao,

@@ -1,9 +1,8 @@
 package rs.raf.projekat2.nemanja_tesic_30_17.presentation.contracts
 
 import androidx.lifecycle.LiveData
-import rs.raf.projekat2.nemanja_tesic_30_17.data.model.custom.ChartData
 import rs.raf.projekat2.nemanja_tesic_30_17.data.model.domain.Beleska
-import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.*
+import rs.raf.projekat2.nemanja_tesic_30_17.presentation.view.states.beleska.BeleskeState
 
 interface BeleskaContract {
 
